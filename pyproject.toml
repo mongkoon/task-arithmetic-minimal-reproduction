@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "task-arithmetic-minimal-reproduction"
+version = "1.0.0"
+description = "Small reproducible three-operation task arithmetic study"
+requires-python = ">=3.10,<3.13"
+dependencies = []
+
+[tool.setuptools.packages.find]
+include = ["task_arithmetic*", "scripts*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

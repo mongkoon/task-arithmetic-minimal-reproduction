@@ -1,0 +1,26 @@
+# Python, notebooks, virtual environments, and editor files
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+*.egg-info/
+.DS_Store
+.vscode/
+.idea/
+.venv/
+venv/
+.env
+.env.*
+
+# Generated data, fine-tuned weights, task vectors, and experiment outputs
+/data/processed/**
+!/data/processed/.gitkeep
+/artifacts/checkpoints/**
+!/artifacts/checkpoints/.gitkeep
+/artifacts/vectors/**
+!/artifacts/vectors/.gitkeep
+/results/**
+!/results/.gitkeep
+!/results/figures/
+/results/figures/**
+!/results/figures/.gitkeep
