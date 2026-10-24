@@ -1,4 +1,4 @@
-# Python, notebooks, virtual environments, and editor files
+# Python and local environment
 __pycache__/
 *.py[cod]
 .pytest_cache/
@@ -12,15 +12,14 @@ venv/
 .env
 .env.*
 
-# Generated data, fine-tuned weights, task vectors, and experiment outputs
+# Large local model checkpoints, vectors, and prepared datasets
 /data/processed/**
 !/data/processed/.gitkeep
 /artifacts/checkpoints/**
 !/artifacts/checkpoints/.gitkeep
 /artifacts/vectors/**
 !/artifacts/vectors/.gitkeep
-/results/**
-!/results/.gitkeep
-!/results/figures/
-/results/figures/**
-!/results/figures/.gitkeep
+
+# The completed small-scale run is deliberately versioned:
+# results/run_summary.json, results/metrics.csv, results/figures/**
+# New runs overwrite these files; review changes before committing.

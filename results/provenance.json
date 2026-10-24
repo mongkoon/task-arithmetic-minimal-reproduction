@@ -1,0 +1,14 @@
+{
+  "description": "Original experiment artifacts downloaded together from Google Colab, unchanged and committed under results/.",
+  "source_archive": "task-arithmetic-results.zip",
+  "run_timestamp_utc": "2026-10-24T18:03:36.189579+00:00",
+  "base_model": "google-t5/t5-small",
+  "dataset_mode": "real",
+  "sha256": {
+    "run_summary.json": "f289160fbb08f296fdc67736b838b74b68db69f8da45e37b2b6ec3a951212c23",
+    "metrics.csv": "67678ca18d5aa5d27b07288356f6672e3035345e08863ae0248425c32d829779",
+    "figures/negation.png": "a6c5bcbb549729210e33e8addf6e65e1875005e2e55a7c05592a816d23b63f80",
+    "figures/addition.png": "8ff2bc4053ca622e2d51992980ba03e76dbfbb577885ee401b89cceefe411bc3",
+    "figures/analogy.png": "0102f78df91d317a77fd62dea9c125ff9369f8b56f2c5519ff580acbc2e65e13"
+  }
+}

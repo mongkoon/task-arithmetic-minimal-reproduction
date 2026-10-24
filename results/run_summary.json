@@ -1,0 +1,2399 @@
+{
+  "status": "completed",
+  "run_utc": "2026-10-24T18:03:36.189579+00:00",
+  "dataset_mode": "real",
+  "scientific_evidence": true,
+  "base_model": "google-t5/t5-small",
+  "settings": {
+    "train_rows": 1600,
+    "validation_rows": 200,
+    "test_rows": 250,
+    "train_steps_per_task": 180,
+    "train_batch_size": 4,
+    "gradient_accumulation": 2,
+    "learning_rate": 0.0001,
+    "seed": 42,
+    "eval_val_size": 80,
+    "eval_test_size": 250,
+    "lm_chunk_tokens": 96
+  },
+  "dataset_provenance": {
+    "mode": "real",
+    "seed": 42,
+    "train_per_supervised_task": 1600,
+    "val_per_supervised_task": 200,
+    "test_per_classification_task": 250,
+    "lm_train_reviews": 2500,
+    "lm_val_reviews": 300,
+    "dataset_sources": {
+      "amazon": "fancyzhx/amazon_polarity",
+      "yelp": "fancyzhx/yelp_polarity",
+      "agnews": "fancyzhx/ag_news"
+    },
+    "note": "Yelp training rows are unlabeled; Yelp sentiment labels are held out for final testing only."
+  },
+  "vector_metadata": {
+    "amazon_sent": {
+      "task": "amazon_sent",
+      "base_model": "google-t5/t5-small",
+      "norm_l2": 10.852879237841357,
+      "reconstruction_max_abs_error": 2.3283064365386963e-10,
+      "tensor_count": 131
+    },
+    "agnews_topic": {
+      "task": "agnews_topic",
+      "base_model": "google-t5/t5-small",
+      "norm_l2": 12.699174937249136,
+      "reconstruction_max_abs_error": 2.3283064365386963e-10,
+      "tensor_count": 131
+    },
+    "amazon_lm": {
+      "task": "amazon_lm",
+      "base_model": "google-t5/t5-small",
+      "norm_l2": 13.390649761420402,
+      "reconstruction_max_abs_error": 4.656612873077393e-10,
+      "tensor_count": 131
+    },
+    "yelp_lm": {
+      "task": "yelp_lm",
+      "base_model": "google-t5/t5-small",
+      "norm_l2": 13.436140523376123,
+      "reconstruction_max_abs_error": 4.656612873077393e-10,
+      "tensor_count": 131
+    }
+  },
+  "cosine_similarities": {
+    "amazon_sent__agnews_topic": 0.5449758179523752,
+    "amazon_sent__amazon_lm": 0.5128050231119203,
+    "amazon_sent__yelp_lm": 0.5059494969374158,
+    "agnews_topic__amazon_lm": 0.45067089245510805,
+    "agnews_topic__yelp_lm": 0.44546463523395274,
+    "amazon_lm__yelp_lm": 0.7056918988984967
+  },
+  "experiments": {
+    "negation": {
+      "experiment": "negation",
+      "rows": [
+        {
+          "experiment": "negation",
+          "variant": "neg_alpha_0",
+          "split": "test",
+          "task": "amazon_sent",
+          "coefficients": {
+            "amazon_sent": -0.0
+          },
+          "accuracy": 0.56,
+          "correct": 140,
+          "examples": 250,
+          "mean_gold_label_probability": 0.5237350845932961,
+          "mean_gold_token_nll": 10.28930708694458,
+          "prediction_sample": [
+            {
+              "gold": "positive",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "negative"
+            }
+          ],
+          "alpha": 0.0,
+          "predeclared": false
+        },
+        {
+          "experiment": "negation",
+          "variant": "neg_alpha_0",
+          "split": "test",
+          "task": "agnews_topic",
+          "coefficients": {
+            "amazon_sent": -0.0
+          },
+          "accuracy": 0.308,
+          "correct": 77,
+          "examples": 250,
+          "mean_gold_label_probability": 0.3028372640572488,
+          "mean_gold_token_nll": 6.4999924650192265,
+          "prediction_sample": [
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "sports",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "sports",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "business",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "world",
+              "predicted": "science and technology"
+            }
+          ],
+          "alpha": 0.0,
+          "predeclared": false
+        },
+        {
+          "experiment": "negation",
+          "variant": "neg_alpha_0.25",
+          "split": "test",
+          "task": "amazon_sent",
+          "coefficients": {
+            "amazon_sent": -0.25
+          },
+          "accuracy": 0.708,
+          "correct": 177,
+          "examples": 250,
+          "mean_gold_label_probability": 0.5408906207084656,
+          "mean_gold_token_nll": 17.51333906173706,
+          "prediction_sample": [
+            {
+              "gold": "positive",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            }
+          ],
+          "alpha": 0.25,
+          "predeclared": false
+        },
+        {
+          "experiment": "negation",
+          "variant": "neg_alpha_0.25",
+          "split": "test",
+          "task": "agnews_topic",
+          "coefficients": {
+            "amazon_sent": -0.25
+          },
+          "accuracy": 0.26,
+          "correct": 65,
+          "examples": 250,
+          "mean_gold_label_probability": 0.270403714735643,
+          "mean_gold_token_nll": 10.395432067871093,
+          "prediction_sample": [
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "sports",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "sports",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "business",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "world",
+              "predicted": "science and technology"
+            }
+          ],
+          "alpha": 0.25,
+          "predeclared": false
+        },
+        {
+          "experiment": "negation",
+          "variant": "neg_alpha_0.5",
+          "split": "test",
+          "task": "amazon_sent",
+          "coefficients": {
+            "amazon_sent": -0.5
+          },
+          "accuracy": 0.676,
+          "correct": 169,
+          "examples": 250,
+          "mean_gold_label_probability": 0.5333792631030083,
+          "mean_gold_token_nll": 19.565933330535888,
+          "prediction_sample": [
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            }
+          ],
+          "alpha": 0.5,
+          "predeclared": true
+        },
+        {
+          "experiment": "negation",
+          "variant": "neg_alpha_0.5",
+          "split": "test",
+          "task": "agnews_topic",
+          "coefficients": {
+            "amazon_sent": -0.5
+          },
+          "accuracy": 0.26,
+          "correct": 65,
+          "examples": 250,
+          "mean_gold_label_probability": 0.2640964547405456,
+          "mean_gold_token_nll": 13.253174726486206,
+          "prediction_sample": [
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "sports",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "sports",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "business",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "world",
+              "predicted": "science and technology"
+            }
+          ],
+          "alpha": 0.5,
+          "predeclared": true
+        },
+        {
+          "experiment": "negation",
+          "variant": "neg_alpha_1",
+          "split": "test",
+          "task": "amazon_sent",
+          "coefficients": {
+            "amazon_sent": -1.0
+          },
+          "accuracy": 0.596,
+          "correct": 149,
+          "examples": 250,
+          "mean_gold_label_probability": 0.5196610667705536,
+          "mean_gold_token_nll": 22.429320625305177,
+          "prediction_sample": [
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            }
+          ],
+          "alpha": 1.0,
+          "predeclared": false
+        },
+        {
+          "experiment": "negation",
+          "variant": "neg_alpha_1",
+          "split": "test",
+          "task": "agnews_topic",
+          "coefficients": {
+            "amazon_sent": -1.0
+          },
+          "accuracy": 0.26,
+          "correct": 65,
+          "examples": 250,
+          "mean_gold_label_probability": 0.26146334905987895,
+          "mean_gold_token_nll": 15.293058347702026,
+          "prediction_sample": [
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "sports",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "sports",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "business",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "world",
+              "predicted": "science and technology"
+            }
+          ],
+          "alpha": 1.0,
+          "predeclared": false
+        },
+        {
+          "experiment": "negation",
+          "variant": "amazon_finetuned",
+          "split": "test",
+          "task": "amazon_sent",
+          "coefficients": {
+            "amazon_sent": 1.0
+          },
+          "accuracy": 0.876,
+          "correct": 219,
+          "examples": 250,
+          "mean_gold_label_probability": 0.8380842716693878,
+          "mean_gold_token_nll": 0.16706950767923262,
+          "prediction_sample": [
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            }
+          ]
+        },
+        {
+          "experiment": "negation",
+          "variant": "amazon_finetuned",
+          "split": "test",
+          "task": "agnews_topic",
+          "coefficients": {
+            "amazon_sent": 1.0
+          },
+          "accuracy": 0.292,
+          "correct": 73,
+          "examples": 250,
+          "mean_gold_label_probability": 0.27940900580957534,
+          "mean_gold_token_nll": 11.944192096710205,
+          "prediction_sample": [
+            {
+              "gold": "science and technology",
+              "predicted": "business"
+            },
+            {
+              "gold": "sports",
+              "predicted": "business"
+            },
+            {
+              "gold": "sports",
+              "predicted": "business"
+            },
+            {
+              "gold": "business",
+              "predicted": "world"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "business"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "business"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "business"
+            },
+            {
+              "gold": "world",
+              "predicted": "world"
+            }
+          ]
+        }
+      ],
+      "primary_alpha": 0.5
+    },
+    "addition": {
+      "experiment": "addition",
+      "rows": [
+        {
+          "experiment": "addition",
+          "variant": "add_alpha_0",
+          "split": "val",
+          "task": "amazon_sent",
+          "coefficients": {
+            "amazon_sent": 0.0,
+            "agnews_topic": 0.0
+          },
+          "accuracy": 0.6,
+          "correct": 48,
+          "examples": 80,
+          "mean_gold_label_probability": 0.5459716964513064,
+          "mean_gold_token_nll": 10.55444534868002,
+          "prediction_sample": [
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            }
+          ],
+          "alpha": 0.0
+        },
+        {
+          "experiment": "addition",
+          "variant": "add_alpha_0",
+          "split": "val",
+          "task": "agnews_topic",
+          "coefficients": {
+            "amazon_sent": 0.0,
+            "agnews_topic": 0.0
+          },
+          "accuracy": 0.3625,
+          "correct": 29,
+          "examples": 80,
+          "mean_gold_label_probability": 0.35242077701259406,
+          "mean_gold_token_nll": 6.313256329298019,
+          "prediction_sample": [
+            {
+              "gold": "sports",
+              "predicted": "world"
+            },
+            {
+              "gold": "world",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "world",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "world",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "business",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            }
+          ],
+          "alpha": 0.0
+        },
+        {
+          "experiment": "addition",
+          "variant": "add_alpha_0.25",
+          "split": "val",
+          "task": "amazon_sent",
+          "coefficients": {
+            "amazon_sent": 0.25,
+            "agnews_topic": 0.25
+          },
+          "accuracy": 0.9,
+          "correct": 72,
+          "examples": 80,
+          "mean_gold_label_probability": 0.7516772001981735,
+          "mean_gold_token_nll": 0.132852302750689,
+          "prediction_sample": [
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            }
+          ],
+          "alpha": 0.25
+        },
+        {
+          "experiment": "addition",
+          "variant": "add_alpha_0.25",
+          "split": "val",
+          "task": "agnews_topic",
+          "coefficients": {
+            "amazon_sent": 0.25,
+            "agnews_topic": 0.25
+          },
+          "accuracy": 0.325,
+          "correct": 26,
+          "examples": 80,
+          "mean_gold_label_probability": 0.35735644744709133,
+          "mean_gold_token_nll": 3.914199709892273,
+          "prediction_sample": [
+            {
+              "gold": "sports",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "world",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "world",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "world",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "business",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            }
+          ],
+          "alpha": 0.25
+        },
+        {
+          "experiment": "addition",
+          "variant": "add_alpha_0.5",
+          "split": "val",
+          "task": "amazon_sent",
+          "coefficients": {
+            "amazon_sent": 0.5,
+            "agnews_topic": 0.5
+          },
+          "accuracy": 0.8875,
+          "correct": 71,
+          "examples": 80,
+          "mean_gold_label_probability": 0.8173294791951775,
+          "mean_gold_token_nll": 0.13381939270475413,
+          "prediction_sample": [
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            }
+          ],
+          "alpha": 0.5
+        },
+        {
+          "experiment": "addition",
+          "variant": "add_alpha_0.5",
+          "split": "val",
+          "task": "agnews_topic",
+          "coefficients": {
+            "amazon_sent": 0.5,
+            "agnews_topic": 0.5
+          },
+          "accuracy": 0.35,
+          "correct": 28,
+          "examples": 80,
+          "mean_gold_label_probability": 0.38994274018332364,
+          "mean_gold_token_nll": 2.3994278769940136,
+          "prediction_sample": [
+            {
+              "gold": "sports",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "world",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "world",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "world",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "business",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            }
+          ],
+          "alpha": 0.5
+        },
+        {
+          "experiment": "addition",
+          "variant": "add_alpha_0.75",
+          "split": "val",
+          "task": "amazon_sent",
+          "coefficients": {
+            "amazon_sent": 0.75,
+            "agnews_topic": 0.75
+          },
+          "accuracy": 0.8875,
+          "correct": 71,
+          "examples": 80,
+          "mean_gold_label_probability": 0.829446775931865,
+          "mean_gold_token_nll": 0.17519429885314822,
+          "prediction_sample": [
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            }
+          ],
+          "alpha": 0.75
+        },
+        {
+          "experiment": "addition",
+          "variant": "add_alpha_0.75",
+          "split": "val",
+          "task": "agnews_topic",
+          "coefficients": {
+            "amazon_sent": 0.75,
+            "agnews_topic": 0.75
+          },
+          "accuracy": 0.5,
+          "correct": 40,
+          "examples": 80,
+          "mean_gold_label_probability": 0.43537830701097846,
+          "mean_gold_token_nll": 1.4042510757455602,
+          "prediction_sample": [
+            {
+              "gold": "sports",
+              "predicted": "world"
+            },
+            {
+              "gold": "world",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "world",
+              "predicted": "world"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "world",
+              "predicted": "world"
+            },
+            {
+              "gold": "business",
+              "predicted": "business"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            }
+          ],
+          "alpha": 0.75
+        },
+        {
+          "experiment": "addition",
+          "variant": "add_alpha_1",
+          "split": "val",
+          "task": "amazon_sent",
+          "coefficients": {
+            "amazon_sent": 1.0,
+            "agnews_topic": 1.0
+          },
+          "accuracy": 0.85,
+          "correct": 68,
+          "examples": 80,
+          "mean_gold_label_probability": 0.8156043867580592,
+          "mean_gold_token_nll": 0.231687148612491,
+          "prediction_sample": [
+            {
+              "gold": "negative",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            }
+          ],
+          "alpha": 1.0
+        },
+        {
+          "experiment": "addition",
+          "variant": "add_alpha_1",
+          "split": "val",
+          "task": "agnews_topic",
+          "coefficients": {
+            "amazon_sent": 1.0,
+            "agnews_topic": 1.0
+          },
+          "accuracy": 0.6375,
+          "correct": 51,
+          "examples": 80,
+          "mean_gold_label_probability": 0.4575982267037034,
+          "mean_gold_token_nll": 0.8849534203531221,
+          "prediction_sample": [
+            {
+              "gold": "sports",
+              "predicted": "world"
+            },
+            {
+              "gold": "world",
+              "predicted": "business"
+            },
+            {
+              "gold": "world",
+              "predicted": "world"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "world",
+              "predicted": "world"
+            },
+            {
+              "gold": "business",
+              "predicted": "business"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            }
+          ],
+          "alpha": 1.0
+        },
+        {
+          "experiment": "addition",
+          "variant": "amazon_finetuned",
+          "split": "val",
+          "task": "amazon_sent",
+          "coefficients": {
+            "amazon_sent": 1.0
+          },
+          "accuracy": 0.9125,
+          "correct": 73,
+          "examples": 80,
+          "mean_gold_label_probability": 0.8759031436406076,
+          "mean_gold_token_nll": 0.13184622985429542,
+          "prediction_sample": [
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            }
+          ]
+        },
+        {
+          "experiment": "addition",
+          "variant": "amazon_finetuned",
+          "split": "val",
+          "task": "agnews_topic",
+          "coefficients": {
+            "amazon_sent": 1.0
+          },
+          "accuracy": 0.3875,
+          "correct": 31,
+          "examples": 80,
+          "mean_gold_label_probability": 0.3294521201052703,
+          "mean_gold_token_nll": 11.628010261058808,
+          "prediction_sample": [
+            {
+              "gold": "sports",
+              "predicted": "business"
+            },
+            {
+              "gold": "world",
+              "predicted": "business"
+            },
+            {
+              "gold": "world",
+              "predicted": "world"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "world"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "business"
+            },
+            {
+              "gold": "world",
+              "predicted": "business"
+            },
+            {
+              "gold": "business",
+              "predicted": "business"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "world"
+            }
+          ]
+        },
+        {
+          "experiment": "addition",
+          "variant": "agnews_finetuned",
+          "split": "val",
+          "task": "amazon_sent",
+          "coefficients": {
+            "agnews_topic": 1.0
+          },
+          "accuracy": 0.7,
+          "correct": 56,
+          "examples": 80,
+          "mean_gold_label_probability": 0.6533360900357366,
+          "mean_gold_token_nll": 2.803922584652901,
+          "prediction_sample": [
+            {
+              "gold": "negative",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "positive"
+            }
+          ]
+        },
+        {
+          "experiment": "addition",
+          "variant": "agnews_finetuned",
+          "split": "val",
+          "task": "agnews_topic",
+          "coefficients": {
+            "agnews_topic": 1.0
+          },
+          "accuracy": 0.7875,
+          "correct": 63,
+          "examples": 80,
+          "mean_gold_label_probability": 0.5091109835542739,
+          "mean_gold_token_nll": 0.23701283436384984,
+          "prediction_sample": [
+            {
+              "gold": "sports",
+              "predicted": "sports"
+            },
+            {
+              "gold": "world",
+              "predicted": "business"
+            },
+            {
+              "gold": "world",
+              "predicted": "world"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "world",
+              "predicted": "world"
+            },
+            {
+              "gold": "business",
+              "predicted": "business"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            }
+          ]
+        },
+        {
+          "experiment": "addition",
+          "variant": "base",
+          "split": "test",
+          "task": "amazon_sent",
+          "coefficients": {},
+          "accuracy": 0.56,
+          "correct": 140,
+          "examples": 250,
+          "mean_gold_label_probability": 0.5237350845932961,
+          "mean_gold_token_nll": 10.28930708694458,
+          "prediction_sample": [
+            {
+              "gold": "positive",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "negative"
+            }
+          ]
+        },
+        {
+          "experiment": "addition",
+          "variant": "base",
+          "split": "test",
+          "task": "agnews_topic",
+          "coefficients": {},
+          "accuracy": 0.308,
+          "correct": 77,
+          "examples": 250,
+          "mean_gold_label_probability": 0.3028372640572488,
+          "mean_gold_token_nll": 6.4999924650192265,
+          "prediction_sample": [
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "sports",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "sports",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "business",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "world",
+              "predicted": "science and technology"
+            }
+          ]
+        },
+        {
+          "experiment": "addition",
+          "variant": "amazon_finetuned",
+          "split": "test",
+          "task": "amazon_sent",
+          "coefficients": {
+            "amazon_sent": 1.0
+          },
+          "accuracy": 0.876,
+          "correct": 219,
+          "examples": 250,
+          "mean_gold_label_probability": 0.8380842716693878,
+          "mean_gold_token_nll": 0.16706950767923262,
+          "prediction_sample": [
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            }
+          ]
+        },
+        {
+          "experiment": "addition",
+          "variant": "amazon_finetuned",
+          "split": "test",
+          "task": "agnews_topic",
+          "coefficients": {
+            "amazon_sent": 1.0
+          },
+          "accuracy": 0.292,
+          "correct": 73,
+          "examples": 250,
+          "mean_gold_label_probability": 0.27940900580957534,
+          "mean_gold_token_nll": 11.944192096710205,
+          "prediction_sample": [
+            {
+              "gold": "science and technology",
+              "predicted": "business"
+            },
+            {
+              "gold": "sports",
+              "predicted": "business"
+            },
+            {
+              "gold": "sports",
+              "predicted": "business"
+            },
+            {
+              "gold": "business",
+              "predicted": "world"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "business"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "business"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "business"
+            },
+            {
+              "gold": "world",
+              "predicted": "world"
+            }
+          ]
+        },
+        {
+          "experiment": "addition",
+          "variant": "agnews_finetuned",
+          "split": "test",
+          "task": "amazon_sent",
+          "coefficients": {
+            "agnews_topic": 1.0
+          },
+          "accuracy": 0.7,
+          "correct": 175,
+          "examples": 250,
+          "mean_gold_label_probability": 0.6479551542401314,
+          "mean_gold_token_nll": 2.828860340356827,
+          "prediction_sample": [
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            }
+          ]
+        },
+        {
+          "experiment": "addition",
+          "variant": "agnews_finetuned",
+          "split": "test",
+          "task": "agnews_topic",
+          "coefficients": {
+            "agnews_topic": 1.0
+          },
+          "accuracy": 0.772,
+          "correct": 193,
+          "examples": 250,
+          "mean_gold_label_probability": 0.5002272587046027,
+          "mean_gold_token_nll": 0.24099823146872223,
+          "prediction_sample": [
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "sports",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "sports",
+              "predicted": "sports"
+            },
+            {
+              "gold": "business",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "world",
+              "predicted": "world"
+            }
+          ]
+        },
+        {
+          "experiment": "addition",
+          "variant": "addition_selected",
+          "split": "test",
+          "task": "amazon_sent",
+          "coefficients": {
+            "amazon_sent": 1.0,
+            "agnews_topic": 1.0
+          },
+          "accuracy": 0.848,
+          "correct": 212,
+          "examples": 250,
+          "mean_gold_label_probability": 0.7943685360513627,
+          "mean_gold_token_nll": 0.2862663410555106,
+          "prediction_sample": [
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            }
+          ]
+        },
+        {
+          "experiment": "addition",
+          "variant": "addition_selected",
+          "split": "test",
+          "task": "agnews_topic",
+          "coefficients": {
+            "amazon_sent": 1.0,
+            "agnews_topic": 1.0
+          },
+          "accuracy": 0.576,
+          "correct": 144,
+          "examples": 250,
+          "mean_gold_label_probability": 0.4240909010469914,
+          "mean_gold_token_nll": 0.9549447178989648,
+          "prediction_sample": [
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "sports",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "sports",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "business",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "science and technology",
+              "predicted": "science and technology"
+            },
+            {
+              "gold": "world",
+              "predicted": "world"
+            }
+          ]
+        }
+      ],
+      "alpha_grid": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "selected_alpha_from_validation": 1.0,
+      "validation_selection_score": 0.870515329419439
+    },
+    "analogy": {
+      "experiment": "analogy",
+      "rows": [
+        {
+          "experiment": "analogy",
+          "variant": "source_val_0.5",
+          "split": "val",
+          "task": "amazon_sent",
+          "coefficients": {
+            "amazon_sent": 0.5
+          },
+          "accuracy": 0.9125,
+          "correct": 73,
+          "examples": 80,
+          "mean_gold_label_probability": 0.82300672121346,
+          "mean_gold_token_nll": 0.09968902031487233,
+          "prediction_sample": [
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            }
+          ],
+          "sentiment_alpha": 0.5
+        },
+        {
+          "experiment": "analogy",
+          "variant": "source_val_0.75",
+          "split": "val",
+          "task": "amazon_sent",
+          "coefficients": {
+            "amazon_sent": 0.75
+          },
+          "accuracy": 0.9125,
+          "correct": 73,
+          "examples": 80,
+          "mean_gold_label_probability": 0.8606938807293772,
+          "mean_gold_token_nll": 0.11422924898488418,
+          "prediction_sample": [
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            }
+          ],
+          "sentiment_alpha": 0.75
+        },
+        {
+          "experiment": "analogy",
+          "variant": "source_val_1",
+          "split": "val",
+          "task": "amazon_sent",
+          "coefficients": {
+            "amazon_sent": 1.0
+          },
+          "accuracy": 0.9125,
+          "correct": 73,
+          "examples": 80,
+          "mean_gold_label_probability": 0.8759031436406076,
+          "mean_gold_token_nll": 0.13184622985429542,
+          "prediction_sample": [
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            }
+          ],
+          "sentiment_alpha": 1.0
+        },
+        {
+          "experiment": "analogy",
+          "variant": "base",
+          "split": "test",
+          "task": "yelp_sent",
+          "coefficients": {},
+          "accuracy": 0.592,
+          "correct": 148,
+          "examples": 250,
+          "mean_gold_label_probability": 0.5540392225533723,
+          "mean_gold_token_nll": 10.478517326831817,
+          "prediction_sample": [
+            {
+              "gold": "positive",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            }
+          ]
+        },
+        {
+          "experiment": "analogy",
+          "variant": "base",
+          "split": "test",
+          "task": "amazon_sent",
+          "coefficients": {},
+          "accuracy": 0.56,
+          "correct": 140,
+          "examples": 250,
+          "mean_gold_label_probability": 0.5237350845932961,
+          "mean_gold_token_nll": 10.28930708694458,
+          "prediction_sample": [
+            {
+              "gold": "positive",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "negative"
+            }
+          ]
+        },
+        {
+          "experiment": "analogy",
+          "variant": "analogy_domain_0",
+          "split": "test",
+          "task": "yelp_sent",
+          "coefficients": {
+            "amazon_sent": 0.5,
+            "yelp_lm": 0.0,
+            "amazon_lm": -0.0
+          },
+          "accuracy": 0.84,
+          "correct": 210,
+          "examples": 250,
+          "mean_gold_label_probability": 0.7306677690148353,
+          "mean_gold_token_nll": 0.18762634768814315,
+          "prediction_sample": [
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            }
+          ],
+          "sentiment_alpha": 0.5,
+          "domain_alpha": 0.0,
+          "predeclared": false,
+          "exploratory": true
+        },
+        {
+          "experiment": "analogy",
+          "variant": "analogy_domain_0",
+          "split": "test",
+          "task": "amazon_sent",
+          "coefficients": {
+            "amazon_sent": 0.5,
+            "yelp_lm": 0.0,
+            "amazon_lm": -0.0
+          },
+          "accuracy": 0.876,
+          "correct": 219,
+          "examples": 250,
+          "mean_gold_label_probability": 0.786303939640522,
+          "mean_gold_token_nll": 0.13812518387974707,
+          "prediction_sample": [
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            }
+          ],
+          "sentiment_alpha": 0.5,
+          "domain_alpha": 0.0,
+          "predeclared": false,
+          "exploratory": true
+        },
+        {
+          "experiment": "analogy",
+          "variant": "analogy_domain_0.1",
+          "split": "test",
+          "task": "yelp_sent",
+          "coefficients": {
+            "amazon_sent": 0.5,
+            "yelp_lm": 0.1,
+            "amazon_lm": -0.1
+          },
+          "accuracy": 0.844,
+          "correct": 211,
+          "examples": 250,
+          "mean_gold_label_probability": 0.7300834985077381,
+          "mean_gold_token_nll": 0.18734832974569873,
+          "prediction_sample": [
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            }
+          ],
+          "sentiment_alpha": 0.5,
+          "domain_alpha": 0.1,
+          "predeclared": false,
+          "exploratory": true
+        },
+        {
+          "experiment": "analogy",
+          "variant": "analogy_domain_0.1",
+          "split": "test",
+          "task": "amazon_sent",
+          "coefficients": {
+            "amazon_sent": 0.5,
+            "yelp_lm": 0.1,
+            "amazon_lm": -0.1
+          },
+          "accuracy": 0.88,
+          "correct": 220,
+          "examples": 250,
+          "mean_gold_label_probability": 0.7861618762016296,
+          "mean_gold_token_nll": 0.1383554763077991,
+          "prediction_sample": [
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            }
+          ],
+          "sentiment_alpha": 0.5,
+          "domain_alpha": 0.1,
+          "predeclared": false,
+          "exploratory": true
+        },
+        {
+          "experiment": "analogy",
+          "variant": "analogy_domain_0.25",
+          "split": "test",
+          "task": "yelp_sent",
+          "coefficients": {
+            "amazon_sent": 0.5,
+            "yelp_lm": 0.25,
+            "amazon_lm": -0.25
+          },
+          "accuracy": 0.848,
+          "correct": 212,
+          "examples": 250,
+          "mean_gold_label_probability": 0.7290178414285183,
+          "mean_gold_token_nll": 0.18714261568186338,
+          "prediction_sample": [
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            }
+          ],
+          "sentiment_alpha": 0.5,
+          "domain_alpha": 0.25,
+          "predeclared": true,
+          "exploratory": false
+        },
+        {
+          "experiment": "analogy",
+          "variant": "analogy_domain_0.25",
+          "split": "test",
+          "task": "amazon_sent",
+          "coefficients": {
+            "amazon_sent": 0.5,
+            "yelp_lm": 0.25,
+            "amazon_lm": -0.25
+          },
+          "accuracy": 0.88,
+          "correct": 220,
+          "examples": 250,
+          "mean_gold_label_probability": 0.7858745489418507,
+          "mean_gold_token_nll": 0.1387602599824313,
+          "prediction_sample": [
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            }
+          ],
+          "sentiment_alpha": 0.5,
+          "domain_alpha": 0.25,
+          "predeclared": true,
+          "exploratory": false
+        },
+        {
+          "experiment": "analogy",
+          "variant": "analogy_domain_0.5",
+          "split": "test",
+          "task": "yelp_sent",
+          "coefficients": {
+            "amazon_sent": 0.5,
+            "yelp_lm": 0.5,
+            "amazon_lm": -0.5
+          },
+          "accuracy": 0.844,
+          "correct": 211,
+          "examples": 250,
+          "mean_gold_label_probability": 0.7273919681608677,
+          "mean_gold_token_nll": 0.18563839094748255,
+          "prediction_sample": [
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            }
+          ],
+          "sentiment_alpha": 0.5,
+          "domain_alpha": 0.5,
+          "predeclared": false,
+          "exploratory": true
+        },
+        {
+          "experiment": "analogy",
+          "variant": "analogy_domain_0.5",
+          "split": "test",
+          "task": "amazon_sent",
+          "coefficients": {
+            "amazon_sent": 0.5,
+            "yelp_lm": 0.5,
+            "amazon_lm": -0.5
+          },
+          "accuracy": 0.884,
+          "correct": 221,
+          "examples": 250,
+          "mean_gold_label_probability": 0.7849567075967788,
+          "mean_gold_token_nll": 0.1394366469255183,
+          "prediction_sample": [
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            },
+            {
+              "gold": "positive",
+              "predicted": "positive"
+            }
+          ],
+          "sentiment_alpha": 0.5,
+          "domain_alpha": 0.5,
+          "predeclared": false,
+          "exploratory": true
+        },
+        {
+          "experiment": "analogy",
+          "variant": "domain_only_control",
+          "split": "test",
+          "task": "yelp_sent",
+          "coefficients": {
+            "yelp_lm": 0.25,
+            "amazon_lm": -0.25
+          },
+          "accuracy": 0.584,
+          "correct": 146,
+          "examples": 250,
+          "mean_gold_label_probability": 0.5547218824476003,
+          "mean_gold_token_nll": 10.485501863479614,
+          "prediction_sample": [
+            {
+              "gold": "positive",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "negative"
+            },
+            {
+              "gold": "positive",
+              "predicted": "negative"
+            },
+            {
+              "gold": "negative",
+              "predicted": "negative"
+            }
+          ]
+        }
+      ],
+      "predeclared_domain_alpha": 0.25,
+      "target_label_usage": "Yelp labels only for final test evaluation; no Yelp labels for training or hyperparameter selection",
+      "source_sentiment_alpha_chosen_on_Amazon_validation": 0.5
+    }
+  },
+  "notes": [
+    "Small-sample implementation; original paper results are not reproduced in full.",
+    "Yelp sentiment labels were used only for held-out test measurement.",
+    "gamma=0.25 was predeclared; other domain gamma values are exploratory.",
+    "Classifier predicts by normalized conditional label log-probability including EOS."
+  ]
+}

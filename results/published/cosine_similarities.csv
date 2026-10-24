@@ -1,0 +1,7 @@
+vector_a,vector_b,cosine_similarity
+amazon_sent,agnews_topic,0.5449758179523752
+amazon_sent,amazon_lm,0.5128050231119203
+amazon_sent,yelp_lm,0.5059494969374158
+agnews_topic,amazon_lm,0.45067089245510805
+agnews_topic,yelp_lm,0.44546463523395274
+amazon_lm,yelp_lm,0.7056918988984967

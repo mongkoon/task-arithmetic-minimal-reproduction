@@ -1,0 +1,99 @@
+{
+  "source_file": "results/run_summary.json",
+  "source_type": "original saved Colab result file",
+  "run_utc": "2026-10-24T18:03:36.189579+00:00",
+  "status": "completed",
+  "base_model": "google-t5/t5-small",
+  "dataset_mode": "real",
+  "settings": {
+    "train_rows": 1600,
+    "validation_rows": 200,
+    "test_rows": 250,
+    "train_steps_per_task": 180,
+    "train_batch_size": 4,
+    "gradient_accumulation": 2,
+    "learning_rate": 0.0001,
+    "seed": 42,
+    "eval_val_size": 80,
+    "eval_test_size": 250,
+    "lm_chunk_tokens": 96
+  },
+  "dataset_provenance": {
+    "mode": "real",
+    "seed": 42,
+    "train_per_supervised_task": 1600,
+    "val_per_supervised_task": 200,
+    "test_per_classification_task": 250,
+    "lm_train_reviews": 2500,
+    "lm_val_reviews": 300,
+    "dataset_sources": {
+      "amazon": "fancyzhx/amazon_polarity",
+      "yelp": "fancyzhx/yelp_polarity",
+      "agnews": "fancyzhx/ag_news"
+    },
+    "note": "Yelp training rows are unlabeled; Yelp sentiment labels are held out for final testing only."
+  },
+  "vector_metadata": {
+    "amazon_sent": {
+      "task": "amazon_sent",
+      "base_model": "google-t5/t5-small",
+      "norm_l2": 10.852879237841357,
+      "reconstruction_max_abs_error": 2.3283064365386963e-10,
+      "tensor_count": 131
+    },
+    "agnews_topic": {
+      "task": "agnews_topic",
+      "base_model": "google-t5/t5-small",
+      "norm_l2": 12.699174937249136,
+      "reconstruction_max_abs_error": 2.3283064365386963e-10,
+      "tensor_count": 131
+    },
+    "amazon_lm": {
+      "task": "amazon_lm",
+      "base_model": "google-t5/t5-small",
+      "norm_l2": 13.390649761420402,
+      "reconstruction_max_abs_error": 4.656612873077393e-10,
+      "tensor_count": 131
+    },
+    "yelp_lm": {
+      "task": "yelp_lm",
+      "base_model": "google-t5/t5-small",
+      "norm_l2": 13.436140523376123,
+      "reconstruction_max_abs_error": 4.656612873077393e-10,
+      "tensor_count": 131
+    }
+  },
+  "cosine_similarities": {
+    "amazon_sent__agnews_topic": 0.5449758179523752,
+    "amazon_sent__amazon_lm": 0.5128050231119203,
+    "amazon_sent__yelp_lm": 0.5059494969374158,
+    "agnews_topic__amazon_lm": 0.45067089245510805,
+    "agnews_topic__yelp_lm": 0.44546463523395274,
+    "amazon_lm__yelp_lm": 0.7056918988984967
+  },
+  "experiment_metadata": {
+    "negation": {
+      "experiment": "negation",
+      "primary_alpha": 0.5
+    },
+    "addition": {
+      "experiment": "addition",
+      "alpha_grid": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "selected_alpha_from_validation": 1.0,
+      "validation_selection_score": 0.870515329419439
+    },
+    "analogy": {
+      "experiment": "analogy",
+      "predeclared_domain_alpha": 0.25,
+      "target_label_usage": "Yelp labels only for final test evaluation; no Yelp labels for training or hyperparameter selection",
+      "source_sentiment_alpha_chosen_on_Amazon_validation": 0.5
+    }
+  },
+  "evaluation_count": 46
+}
