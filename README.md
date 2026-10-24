@@ -1,5 +1,7 @@
 # Task Arithmetic: Negation, Addition, and Analogy
 
+**English** | [한국어](README.ko.md)
+
 A minimal, independent implementation of **weight-space task-vector arithmetic**, inspired by [*Editing Models with Task Arithmetic* (Ilharco et al., ICLR 2023)](https://arxiv.org/abs/2212.04089).
 
 The implementation uses **T5-small** and four independently fine-tuned full-parameter checkpoints derived from the same initialization. It examines whether simple parameter-space arithmetic can modify task performance without additional training at merge time.
