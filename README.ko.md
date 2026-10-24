@@ -35,6 +35,8 @@ $$\tau_t = \theta_t - \theta_0.$$
 
 ## 재현 방법 (Reproducibility)
 
+[Google Colab Notebook](notebooks/run_in_colab.ipynb)에서는 데이터 준비, 전체 파라미터 미세조정, Task Vector 추출, 세 가지 산술 연산, 평가와 그래프 생성 코드를 단계별로 직접 확인하고 실행할 수 있습니다. 공개 GitHub 저장소를 자동으로 복제하므로 ZIP 파일을 별도로 업로드할 필요는 없습니다.
+
 저장소 최상위 디렉터리에서 아래 명령어로 기본 실험 파이프라인을 실행할 수 있습니다.
 
 ```bash

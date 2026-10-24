@@ -35,6 +35,8 @@ All edits are applied independently from the original parameter state. Reconstru
 
 ## Reproducibility
 
+The [Google Colab notebook](notebooks/run_in_colab.ipynb) displays the actual Python code for data preparation, full-parameter training, task-vector extraction, negation, addition, analogy, evaluation, and plotting. It clones the public repository automatically; no ZIP upload is required.
+
 The default pipeline can be invoked from the repository root with:
 
 ```bash
