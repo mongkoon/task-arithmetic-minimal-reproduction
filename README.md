@@ -2,42 +2,90 @@
 
 **English** | [한국어](README.ko.md)
 
-A minimal, independent implementation of **weight-space task-vector arithmetic**, inspired by [*Editing Models with Task Arithmetic* (Ilharco et al., ICLR 2023)](https://arxiv.org/abs/2212.04089).
+An independent, small-scale investigation of **task vectors in model weight space** using [`google-t5/t5-small`](https://huggingface.co/google-t5/t5-small), based on [*Editing Models with Task Arithmetic* (Ilharco et al., ICLR 2023)](https://arxiv.org/abs/2212.04089).
 
-The implementation uses **T5-small** and four independently fine-tuned full-parameter checkpoints derived from the same initialization. It examines whether simple parameter-space arithmetic can modify task performance without additional training at merge time.
+This repository includes **one completed Google Colab experiment**: the executable notebook with its recorded outputs, the **original evaluation JSON and CSV downloaded from Colab**, original PNG figures, executable training/evaluation scripts, and bilingual analysis. The project is a limited implementation, **not an exact reproduction of the entire paper**.
 
-> **Scope:** Small-scale experimental implementation, not a reproduction of the full paper. No empirical results are included in this repository. Model training and benchmark execution are required to obtain results.
+**[Results and interpretation](results/README.md) · [결과 및 해석](results/README.ko.md) · [Executed notebook](notebooks/run_in_colab.ipynb)**
 
-## Operations
+## Research question and operations
 
-Given a shared pretrained parameter vector $\theta_0$ and independently fine-tuned parameters $\theta_t$, the task vector is
+For the common pretrained initialization $\theta_0$ and separately fine-tuned checkpoints $\theta_t$, define a task vector as:
 
 $$\tau_t = \theta_t - \theta_0.$$
 
-| Operation | Weight-space edit | Evaluation |
+| Operation | Applied weight edit | Target evaluation |
 |---|---|---|
-| Negation | $\theta_0 - \alpha\tau_{\mathrm{AmazonSent}}$ | Amazon sentiment accuracy and AG News control accuracy |
-| Addition | $\theta_0 + \alpha(\tau_{\mathrm{AmazonSent}} + \tau_{\mathrm{AGNews}})$ | Both tasks, compared against base and specialized models |
-| Analogy | $\theta_0 + \beta\tau_{\mathrm{AmazonSent}} + \gamma(\tau_{\mathrm{YelpLM}} - \tau_{\mathrm{AmazonLM}})$ | Held-out Yelp sentiment accuracy, compared against source-only transfer |
+| **Negation** | $\theta_0 - \alpha\tau_{\mathrm{AmazonSent}}$ | Amazon sentiment; AG News as a control |
+| **Addition** | $\theta_0 + \alpha(\tau_{\mathrm{AmazonSent}}+\tau_{\mathrm{AGNews}})$ | Both classification tasks in a single model |
+| **Analogy** | $\theta_0+\beta\tau_{\mathrm{AmazonSent}}+\gamma(\tau_{\mathrm{YelpLM}}-\tau_{\mathrm{AmazonLM}})$ | Yelp sentiment without using labeled Yelp data for tuning |
 
-All edits are applied independently from the original parameter state. Reconstruction of each fine-tuned checkpoint at coefficient 1 is checked numerically.
+All edits start independently from the original base model parameters. The experiment also checks whether adding a task vector at coefficient 1 reconstructs the corresponding fine-tuned checkpoint.
 
-## Experimental setup
+## Recorded outcomes
 
-- **Backbone:** [`google-t5/t5-small`](https://huggingface.co/google-t5/t5-small).
-- **Supervised datasets:** [Amazon Polarity](https://huggingface.co/datasets/fancyzhx/amazon_polarity) and [AG News](https://huggingface.co/datasets/fancyzhx/ag_news).
-- **Unlabeled domain adaptation:** Amazon and [Yelp Polarity](https://huggingface.co/datasets/fancyzhx/yelp_polarity) texts; labels are discarded before LM fine-tuning.
-- **Analogy evaluation:** Yelp held-out labeled *test* split only. Target labels are not used for training or hyperparameter selection.
-- **Language-modeling objective:** A reduced consecutive-token-chunk seq2seq proxy (96 tokens by default), which differs from the original paper's exact setup.
-- **Classifier evaluation:** Length-normalized conditional label log-probabilities, including EOS, rather than free-form text generation.
-- **Validation:** Addition coefficients are selected on labeled Amazon and AG News validation data; the source sentiment coefficient is selected on Amazon validation data. Analogy domain coefficient `0.25` is prespecified as the primary comparison; other domain coefficients are exploratory.
-- **Compute:** Python 3.10–3.12 and PyTorch; a GPU is recommended. Public datasets and base weights are downloaded at runtime.
+One run with **seed 42**, four separately fine-tuned checkpoints, and **250 held-out test examples per task** yielded the following results:
 
-## Reproducibility
+| Operation | Observation | Interpretation |
+|---|---|---|
+| **Negation** ($\alpha=0.5$) | Amazon accuracy **56.0% → 67.6%**; AG News control **30.8% → 26.0%** | Targeted forgetting **not demonstrated** |
+| **Addition** ($\alpha=1.0$) | Amazon **84.8%**, AG News **57.6%**, vs base **56.0%** and **30.8%** | Both improved over base; below respective specialists **87.6%** and **77.2%** |
+| **Analogy** ($\beta=0.5$, $\gamma=0.25$) | Yelp **84.0% → 84.8%** vs source-only transfer | Net gain of **+0.8 percentage points (2/250)**; inconclusive in one run |
 
-The [Google Colab notebook](notebooks/run_in_colab.ipynb) displays the actual Python code for data preparation, full-parameter training, task-vector extraction, negation, addition, analogy, evaluation, and plotting. It clones the public repository automatically; no ZIP upload is required.
+![Addition: original Colab figure](results/figures/addition.png)
 
-The default pipeline can be invoked from the repository root with:
+The conclusion is **mixed**, not a confirmation of all three effects. A parameter difference is numerically computable and checkpoint reconstruction works, but that alone does not establish independent, linearly separable task capabilities. See the [full results analysis](results/README.md) for baselines, coefficient selection, vector norms, and limitations.
+
+## Experiment configuration
+
+| Setting | Recorded value |
+|---|---|
+| Base model | `google-t5/t5-small` |
+| Fine-tuned tasks | `amazon_sent`, `agnews_topic`, `amazon_lm`, `yelp_lm` |
+| Datasets | [Amazon Polarity](https://huggingface.co/datasets/fancyzhx/amazon_polarity), [AG News](https://huggingface.co/datasets/fancyzhx/ag_news), [Yelp Polarity](https://huggingface.co/datasets/fancyzhx/yelp_polarity) |
+| Training | 180 optimization steps per checkpoint; batch size 4; gradient accumulation 2; learning rate `1e-4` |
+| Supervised data | 1,600 training and 200 validation examples per task |
+| Domain LM data | 2,500 unlabeled reviews per domain for training; 300 for validation |
+| Evaluation | 80 examples per validation task for coefficient selection; 250 examples per test task |
+| Classifier | Length-normalized conditional label log-probability (EOS included) |
+| Domain LM approximation | Consecutive 96-token chunk pairs in a seq2seq proxy objective |
+| Recorded device | NVIDIA Tesla T4 (Google Colab) |
+
+Yelp sentiment labels are used for **final held-out evaluation only**, not fine-tuning or coefficient selection. The simplified LM proxy differs from the original paper's precise language-modeling procedure.
+
+## Repository structure
+
+```text
+README.md                          # English project overview
+README.ko.md                       # Korean project overview
+notebooks/run_in_colab.ipynb       # Executed, explanatory Python notebook
+scripts/                           # CLI pipeline and result-table exporter
+task_arithmetic/                   # Shared model/data/evaluation code
+tests/                             # Unit and archived-data integrity checks
+results/
+  README.md                        # English results, tables and analysis
+  README.ko.md                     # Korean results, tables and analysis
+  run_summary.json                 # ORIGINAL full Colab JSON (complete recorded run)
+  metrics.csv                      # ORIGINAL detailed Colab metrics (46 rows)
+  figures/
+    negation.png                    # ORIGINAL Colab figure
+    addition.png                    # ORIGINAL Colab figure
+    analogy.png                     # ORIGINAL Colab figure
+  published/                       # Derived compact CSV/metadata summaries
+    metrics.csv
+    vectors.csv
+    cosine_similarities.csv
+    recorded_run.json
+    figures/                      # Original-chart mirrors and derived cosine figure
+artifacts/checkpoints/             # Local-only large model checkpoints
+data/processed/                     # Local-only prepared data
+```
+
+**Provenance:** `results/run_summary.json`, `results/metrics.csv`, and the three PNG files in `results/figures/` are the **original archived Colab outputs**, not back-filled estimates from notebook text. The `results/published/` directory contains compact derivatives of the original JSON. The full trained model checkpoints and complete example-level predictions were not supplied and are not claimed to be available.
+
+## Running and verifying
+
+With Python 3.10–3.12 and a GPU recommended:
 
 ```bash
 python -m pip install -r requirements.txt
@@ -45,36 +93,27 @@ python -m pytest -q
 bash scripts/run_all.sh
 ```
 
-The scripts may also be run individually: `prepare_data`, `train_task`, `extract_vectors`, `run_experiments`, and `plot_results` under `scripts/`. Use `--help` for their arguments. The pipeline performs four full-parameter fine-tunes from the same base checkpoint; runtime and GPU memory requirements vary by environment.
+The [Colab notebook](notebooks/run_in_colab.ipynb) shows the training loop, parameter subtraction, all three weight edits, evaluation, and plotting as explicit code cells. The equivalent CLI entry points are located in `scripts/`. A new execution requires model/dataset downloads; it may **overwrite the versioned `results/` files** in the local checkout. Archive previous results before intentionally publishing another run.
 
-Outputs written locally (ignored by Git):
+To regenerate **only the derived compact tables** from the archived original JSON, without training or model downloads:
 
-```text
-data/processed/             # prepared dataset subsets
-artifacts/checkpoints/      # four fine-tuned checkpoints
-artifacts/vectors/          # task-vector tensors and metadata
-results/run_summary.json    # measured metrics and configurations
-results/metrics.csv         # flattened metrics
-results/figures/            # negation, addition and analogy plots
+```bash
+python scripts/export_recorded_results.py
 ```
 
-`--mode fixture` is only for debugging the pipeline with synthetic inputs. **Fixture outputs are not empirical evidence.** The default mode uses real public datasets.
+The experiment's original charts are retained as-is; the exporter does not overwrite them. The `results/published/figures/vector_cosines.png` supplemental plot is generated from the recorded vector cosine values.
 
 ## Limitations
 
-- Small-sample experiments with a single random seed do not establish generalization or statistical significance.
-- Task-vector arithmetic is defined by weight differences; computing a delta alone does not show that a behavioral capability is linearly isolated.
-- Strong evidence for negation requires preserving unaffected task performance, which may be difficult to assess when the base model already has poor zero-shot accuracy on a control task.
-- Addition may exhibit interference across task vectors; accuracy gains are not guaranteed.
-- Analogy is an empirical transfer hypothesis. In particular, a small proxy LM objective and limited training may fail to yield improvements.
-- Task vectors require compatible model architectures and a common fine-tuning initialization; LoRA adapters or quantized tensors are not treated as full-model deltas here.
+- One random seed and 250-item test sets do **not** establish significance or robust generalization.
+- Base AG News accuracy is low, limiting its value as a selective-forgetting control.
+- Addition improves both tasks relative to base but has substantial interference relative to specialized checkpoints.
+- The analogy gain is only **2 net correct predictions**; complete paired example-level predictions are unavailable for a paired significance test.
+- The experiment uses shortened fine-tuning and a simplified LM objective, so outcomes are not directly comparable to the full-scale original paper.
+- Compatible model architecture and identical pretrained initialization are required for the tested full-parameter arithmetic; standalone LoRA adapter deltas are not used here.
 
-## Source
+## Reference and license
 
-Ilharco, G., et al. (2023). [*Editing Models with Task Arithmetic*](https://arxiv.org/abs/2212.04089). ICLR 2023. Original implementation: [mlfoundations/task_vectors](https://github.com/mlfoundations/task_vectors).
+Ilharco, G., et al. (2023). [*Editing Models with Task Arithmetic*](https://arxiv.org/abs/2212.04089), ICLR 2023. [Original project](https://github.com/mlfoundations/task_vectors).
 
-This repository is an independent educational implementation and is not affiliated with the paper's authors.
-
-## License
-
-See [LICENSE](LICENSE).
+Independent implementation; not affiliated with the original authors. See [LICENSE](LICENSE).

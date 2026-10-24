@@ -1,4 +1,4 @@
-# Tested API compatibility target: Python 3.10-3.12, transformers 4.x.
+# Tested API compatibility target: Python 3.10-3.13, transformers 4.x.
 # Install torch matching your CUDA runtime via https://pytorch.org/get-started/locally/
 torch>=2.2,<3
 transformers>=4.46,<5

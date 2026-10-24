@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "task-arithmetic-minimal-reproduction"
 version = "1.0.0"
 description = "Small reproducible three-operation task arithmetic study"
-requires-python = ">=3.10,<3.13"
+requires-python = ">=3.10,<3.14"
 dependencies = []
 
 [tool.setuptools.packages.find]
